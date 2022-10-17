@@ -1,0 +1,33 @@
+ul {
+    color: rgb(0, 0, 0);
+}
+
+li {
+    color: purple;
+}
+
+button {
+    width: 15rem;
+    height: 10rem;
+    font-size: 25px;
+    background-color: aqua;
+}
+
+button:hover {
+    background-color: rgb(0, 195, 195);
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+button:active {
+    background-color: rgb(0, 195, 195);
+    box-shadow: 0 5px #666;
+    transform: translateY(5px);
+}
+
+body {
+    background: rgb(255, 255, 255);
+}
+
+/* .afterClick {
+    background: green;
+} */
