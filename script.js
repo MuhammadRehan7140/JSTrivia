@@ -9,6 +9,7 @@ const baseUrl = "https://opentdb.com/api.php?amount=10"
 
 // }
 
+// Using Fetch() to grab all the Data from the Trivia API----------------------------
 fetch(baseUrl)
     .then(response => {
         return response.json()
@@ -17,7 +18,9 @@ fetch(baseUrl)
         console.log(
             "Data", data
         )
+        //----------------------------------------------------------------------------------
 
+        // Main For Loop for the Webpage----------------------------------------------
         for (let result of data.results) {
             /* Print out the question & correct answer in the console --------*/
             console.log("Question: ", result.question)
@@ -51,6 +54,7 @@ fetch(baseUrl)
                 ansDict[inc] = "0";
             })
             //-------------------------------------------------------------------------------
+
             // Iterates through the dictionary and Displays all the answer choices----------
             for (var ans in ansDict) {
                 const ansSection = document.createElement("button");
