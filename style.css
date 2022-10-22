@@ -19,7 +19,7 @@ button {
 }
 
 .button_container {
-    border: 2px solid red;
+    /* border: 5px solid black; */
     display: flex;
     /* flex-direction: row-reverse; */
     justify-content: space-around;
