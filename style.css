@@ -2,10 +2,6 @@ ul {
     color: rgb(0, 0, 0);
 }
 
-li {
-    color: black;
-}
-
 button {
     width: 20rem;
     height: 10rem;
@@ -16,6 +12,10 @@ button {
     justify-content: center;
     flex-direction: row;
     border-radius: 20px;
+}
+
+.question_container {
+    text-align: center;
 }
 
 .button_container {
