@@ -9,20 +9,7 @@ const baseUrl = "https://opentdb.com/api.php?amount=10"
 
 // }
 
-// const fetchURL = (URL) => {
-//     let ret;
-//     fetch(URL)
-//         .then(response => {
-//             return response.json()
-//         })
-//         .then(data => {
-//             // console.log("Data: ", data)
-//             ret = data;
-//             return data
-//         })
 
-//     return ret;
-// }
 
 const fetchUrl = async (url) => {
     const response = await fetch(url);
@@ -51,17 +38,15 @@ const DisplayQuestionsAndAnswers = async (data) => {
     //The two variables are used to check question index and to print each question one at a time
     // POSSIBLE BUG:: ON HARD REFRESH THE COUNTER MAY NOT RETURN TO 0---------------------
     let d = data;
-    let questionIAmOn = 0;
-    let verifyQuestionIamOn = 0;
     // questionCount is used to number the question as their displayed on the webpage-----
     let questionCount = 1;
-    console.log("IN FUNC: d => ", d);
+    console.log("IN FUNC: data => ", d);
 
-    let ansSection;
-    if (ansSection) {
-        ansSection.addEventListener('click', buttonAction);
+    // let ansSection;
+    // if (ansSection) {
+    //     ansSection.addEventListener('click', buttonAction);
 
-    }
+    // }
 
     for (let [idx, result] of d.results.entries()) {
         if (idx === globalCounter) {
@@ -120,22 +105,16 @@ const DisplayQuestionsAndAnswers = async (data) => {
 
             mainContainer.append(document.createElement("hr"));
 
-            questionIAmOn++
         }
 
     }
 
 }
 
-const validateButton = (event, data) => {
-    // Find the object in our data array that matches the current question we are on
-
-    // Check if selected answer text matches the 'correct_answer'
-
-    // If yes : CORRECT YAY
-
-    // Else:  FALSE YOU SUCK
-
+const decodeHTMLEntities = (text) => {
+    let textArea = document.createElement('textarea');
+    textArea.innerHTML = text;
+    return textArea.value;
 }
 
 const buttonAction = (event, currentQuestion, all) => {
@@ -152,13 +131,14 @@ const buttonAction = (event, currentQuestion, all) => {
     // }
 
     // This stands for the index of the QuestionAnswer Array
-    let currentQuestionIdx = event.target.id;
     console.log("Current question objs => ", currentQuestion);
 
     console.log("ALL =-> ", all);
     // Logic
 
-    if (event.target.innerText === currentQuestion.correct_answer) {
+    const decodedHTMLCorrectAnswer = decodeHTMLEntities(currentQuestion.correct_answer)
+    if (event.target.innerText === decodedHTMLCorrectAnswer) {
+
         alert("CORRECT!!!!!!");
         globalCounter++;
         if (all) {
@@ -177,36 +157,17 @@ const mainDriver = async () => {
     const questionsAndAnswers = await fetchUrl(baseUrl);
     let lenQuestions = questionsAndAnswers.length;
 
-    let curr = 0;
-    let correct = false;
-    // while (curr != lenQuestions - 1) {
-    //     correct = DisplayQuestionsAndAnswers(questionsAndAnswers[curr]);
 
-    //     if (correct) {
-    //         alert("YAY")
-    //         curr++;
-    //     } else {
-    //         alert("NAH")
-    //     }
-    // }
     DisplayQuestionsAndAnswers(questionsAndAnswers);
 
     console.log("Q/A => ", questionsAndAnswers);
 
-
-    /*
-        While curr is not equal to length of questionsAnswers
-        DisplayAnswerQuestion function takes in ONE Question and displays
-        returns a boolean depending if you got the answer right or not
-
-        if True
-            curr++
-
-    */
-
 }
 
 mainDriver()
+
+
+
 
 // Using Fetch() to grab all the Data from the Trivia API----------------------------
 const testOriginalCode = () => {
